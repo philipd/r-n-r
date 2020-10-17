@@ -48,4 +48,4 @@ const tasks = {
 //   benchmark(bigTask);
 // }
 
-module.export = { doXTimes, benchmark }
+module.exports = { doXTimes, benchmark }

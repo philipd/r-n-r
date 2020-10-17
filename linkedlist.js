@@ -1,4 +1,7 @@
-const { doXTimes, benchmark } = require('./benchmark');
+const Chance = require("chance");
+const { doXTimes, benchmark } = require("./benchmark");
+
+const chance = new Chance();
 
 class linkedList {
   constructor(value) {
@@ -15,7 +18,7 @@ class linkedList {
 
   get tail() {
     let current = this.head;
-    while(current.next) {
+    while (current.next) {
       current = current.next;
     }
     return current;
@@ -39,17 +42,17 @@ class linkedList {
 
   insertAt = (position, value) => {
     // We need to change the reference stored at the PREVIOUS point in the list
-    let predecessor = this.itemAtPosition(position-1);
+    let predecessor = this.itemAtPosition(position - 1);
     predecessor.next = new linkedListItem(value, predecessor.next);
   };
 
   printAll = () => {
     let current = this.head;
-    while(current) {
+    while (current) {
       console.log(current.value);
       current = current.next;
     }
-  }
+  };
 }
 
 class linkedListItem {
@@ -59,22 +62,51 @@ class linkedListItem {
   }
 }
 
-const myList = new linkedList(13);
+myList = new linkedList(0);
 
-myList.printAll();
-console.log('========');
-myList.prepend(2);
-myList.prepend(38);
-myList.prepend(27);
-myList.prepend(91);
-myList.printAll();
-console.log(myList.valueAtPosition(1));
-console.log(myList.itemAtPosition(0));
-console.log('========');
-myList.printAll();
-console.log('========');
-myList.append(99);
-myList.printAll();
-console.log('========');
-myList.insertAt(3, 77);
-myList.printAll();
+const tasks = {
+  prepend: () => {
+    let myList = new linkedList(0);
+    for (let i = 0; i < Math.pow(10, 5); i++) {
+      myList.prepend(chance.integer({ min: 0, max: 99 }));
+    }
+  },
+  append: () => {
+    let myList = new linkedList(0);
+    for (let i = 0; i < Math.pow(10, 4); i++) {
+      myList.append(chance.integer({ min: 0, max: 99 }));
+    }
+  },
+  push: () => {
+    let myArray = [];
+    for (let i = 0; i < Math.pow(10, 5); i++) {
+      myArray.push(chance.integer({ min: 0, max: 99 }));
+    }
+  },
+};
+
+for(let task in tasks) {
+  benchmark(tasks[task]);
+}
+
+// benchmark(doXTimes(myList.append(chance.integer({ min: 0, max: 99 }), 1)));
+
+// const myList = new linkedList(13);
+
+// myList.printAll();
+// console.log('========');
+// myList.prepend(2);
+// myList.prepend(38);
+// myList.prepend(27);
+// myList.prepend(91);
+// myList.printAll();
+// console.log(myList.valueAtPosition(1));
+// console.log(myList.itemAtPosition(0));
+// console.log('========');
+// myList.printAll();
+// console.log('========');
+// myList.append(99);
+// myList.printAll();
+// console.log('========');
+// myList.insertAt(3, 77);
+// myList.printAll();
