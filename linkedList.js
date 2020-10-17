@@ -16,6 +16,16 @@ class linkedList {
     this.tail.next = new linkedListItem(value);
   }
 
+  get length() {
+    let current = this.head;
+    let counter = 0;
+    while (current.next) {
+      current = current.next;
+      counter++;
+    }
+    return counter;
+  }
+
   get tail() {
     let current = this.head;
     while (current.next) {
@@ -85,9 +95,11 @@ const tasks = {
   },
 };
 
-for(let task in tasks) {
-  benchmark(tasks[task]);
-}
+module.exports = linkedList;
+
+// for(let task in tasks) {
+//   benchmark(tasks[task]);
+// }
 
 // benchmark(doXTimes(myList.append(chance.integer({ min: 0, max: 99 }), 1)));
 
