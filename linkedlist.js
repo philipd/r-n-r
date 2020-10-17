@@ -35,11 +35,10 @@ class linkedList {
     return current;
   }
 
-  insertAt = (head, ordinalPosition, value) => {
-    let current = head;
-    for (let i = 0; i != ordinalPosition; i++) {
-      current = current.next;
-    }
+  insertAt = (position, value) => {
+    // We need to change the reference stored at the PREVIOUS point in the list
+    let predecessor = this.itemAtPosition(position-1);
+    predecessor.next = new linkedListItem(value, predecessor.next);
   };
 
   printAll = () => {
@@ -68,7 +67,7 @@ const myList = new linkedList(13);
 // }
 
 myList.printAll();
-console.log('====');
+console.log('========');
 myList.prepend(2);
 myList.prepend(38);
 myList.prepend(27);
@@ -80,4 +79,7 @@ console.log('========');
 myList.printAll();
 console.log('========');
 myList.append(99);
+myList.printAll();
+console.log('========');
+myList.insertAt(3, 77);
 myList.printAll();
