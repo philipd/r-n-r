@@ -8,10 +8,10 @@ class linkedList {
   }
 
   append(value) {
-    this.lastItem.next = new linkedListItem(value);
+    this.tail.next = new linkedListItem(value);
   }
 
-  get lastItem() {
+  get tail() {
     let current = this.head;
     while(current.next) {
       current = current.next;
