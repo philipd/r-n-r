@@ -37,7 +37,7 @@ class LinkedList {
     return current.value;
   }
 
-  itemAtPosition(position) {
+  elementAtPosition(position) {
     let current = this.head;
     for (let i = 0; i < position; i++) {
       current = current.next;
@@ -63,7 +63,7 @@ class LinkedList {
 
   insertAt(position, value) {
     // We need to change the reference stored at the PREVIOUS point in the list
-    let predecessor = this.itemAtPosition(position - 1);
+    let predecessor = this.elementAtPosition(position - 1);
     predecessor.next = new LinkedListItem(value, predecessor.next);
     return predecessor.next;
   };

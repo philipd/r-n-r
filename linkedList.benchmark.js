@@ -31,7 +31,7 @@ const randInt = () => {
   return chance.integer({ min: 0, max: 999999999999 });
 };
 
-const populateList = () => {
+const generateList = () => {
   let myList = new LinkedList(chance.name());
 
   doXTimes(() => { myList.prepend(chance.name()) }, Math.pow(10, 6))();
@@ -39,13 +39,19 @@ const populateList = () => {
 }
 
 const lotsOfListInsertions = (myList) => {
-  const insertionPoint = myList.itemAtPosition(Math.pow(10,5));
+  const insertionPoint = myList.elementAtPosition(Math.pow(10,5));
   for(let i=0; i<Math.pow(10,3); i++){
     myList.insert(insertionPoint, chance.name());
   }
 }
 
-const populateArray = () => {
+const lotsOfSlowListInsertions = (myList) => {
+  for(let i=0; i<Math.pow(10,3); i++){
+    myList.insertAt(Math.pow(10,5), chance.name());
+  }
+}
+
+const generateArray = () => {
   let myArray = [];
 
   doXTimes(() => { myArray.push(chance.name()) }, Math.pow(10, 6))();
@@ -59,11 +65,15 @@ const lotsOfArrayInsertions = (myArray) => {
   )();
 }
 
-const testList = benchmark(populateList);
+const testList = benchmark(generateList);
 benchmark(() => testList.find(4565123), 'failed find');
 benchmark(() => testList.find(testList.valueAtPosition(10000)), 'successful find');
 benchmark(() => lotsOfListInsertions(testList), 'lots of list insertions');
-const testArray = benchmark(populateArray);
+
+const testList2 = generateList();
+benchmark(() => lotsOfSlowListInsertions(testList), 'lots of slow list insertions');
+
+const testArray = benchmark(generateArray);
 console.log('length', testArray.length);
 benchmark(() => lotsOfArrayInsertions(testArray), 'lots of array insertions');
 console.log('length', testArray.length);
