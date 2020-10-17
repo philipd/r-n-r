@@ -4,21 +4,6 @@ If you've spent more than a couple of hours in your life coding, then you've alm
 ## Basics
 The basic idea behind linked lists is disarmingly simple: store each piece of data together with a reference to the location of the next piece of data. All we need to know is the location of the first piece of data, and we can find the rest by following the references. It's kind of like a treasure hunt where each hidden clue tells you the location of the next clue.
 
-Let's look closer at the details. Remember that every piece of memory in a computer is stored as binary in a specific location with a specific address, like so:
-Address | Value
---- | ---
-0000 | 0101 0101 0111 1101
-0001 | 0101 0110 1110 1110
-0010 | 0101 0101 0111 1101
-0011 | 0101 0101 0111 1101
-Ok, binary is a bit hard to read, so let's make things more human-friendly: 
-Address | Value
---- | ---
-0000 | 0101 0101 0111 1101
-0001 | 0101 0110 1110 1110
-0010 | 0101 0101 0111 1101
-0011 | 0101 0101 0111 1101
-
 
 ## Caveat
 Languages like JavaScript, Python, Java, C#, and PHP (the most popular programming languages, in other words!) operate at a very high level of abstraction, meaning that they secretly do a lot of complicated things with your computer's resources (such as its memory) while hiding the details from the programmer so that the code is easier to read, write, and manage. In contrast, more traditional languages that compile to machine code, like C or C++, require the programmer to manage the computer's resources much more directly and explicitly. It's not unlike  the difference between driving a stick-shift and an automatic; the car is still changing gear ratios, but if you're driving an automatic, you don't need to think about it or even be aware that it's happening.
