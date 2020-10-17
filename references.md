@@ -5,3 +5,4 @@
 - [JavaScript Array Performance Oddities (qooxdoo)](https://news.qooxdoo.org/javascript-array-performance-oddities-characteristics-d8139757b238)
 - [Array - Javascript (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
 - [How do JavScript arrays work under the hood? (Ryan Peden)](https://ryanpeden.com/how-do-javascript-arrays-work-under-the-hood/)
+- [Array data structure (Wikipedia)](https://en.wikipedia.org/wiki/Array_data_structure)
