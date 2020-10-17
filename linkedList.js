@@ -3,17 +3,17 @@ const { doXTimes, benchmark } = require("./benchmark");
 
 const chance = new Chance();
 
-class linkedList {
+class LinkedList {
   constructor(value) {
-    this.head = new linkedListItem(value);
+    this.head = new LinkedListItem(value);
   }
 
   prepend(value) {
-    this.head = new linkedListItem(value, this.head);
+    this.head = new LinkedListItem(value, this.head);
   }
 
   append(value) {
-    this.tail.next = new linkedListItem(value);
+    this.tail.next = new LinkedListItem(value);
   }
 
   get length() {
@@ -53,7 +53,7 @@ class linkedList {
   insertAt = (position, value) => {
     // We need to change the reference stored at the PREVIOUS point in the list
     let predecessor = this.itemAtPosition(position - 1);
-    predecessor.next = new linkedListItem(value, predecessor.next);
+    predecessor.next = new LinkedListItem(value, predecessor.next);
   };
 
   printAll = () => {
@@ -65,24 +65,24 @@ class linkedList {
   };
 }
 
-class linkedListItem {
+class LinkedListItem {
   constructor(value, next) {
     this.value = value;
     this.next = next;
   }
 }
 
-myList = new linkedList(0);
+myList = new LinkedList(0);
 
 const tasks = {
   prepend: () => {
-    let myList = new linkedList(0);
+    let myList = new LinkedList(0);
     for (let i = 0; i < Math.pow(10, 5); i++) {
       myList.prepend(chance.integer({ min: 0, max: 99 }));
     }
   },
   append: () => {
-    let myList = new linkedList(0);
+    let myList = new LinkedList(0);
     for (let i = 0; i < Math.pow(10, 4); i++) {
       myList.append(chance.integer({ min: 0, max: 99 }));
     }
@@ -95,7 +95,7 @@ const tasks = {
   },
 };
 
-module.exports = linkedList;
+module.exports = LinkedList;
 
 // for(let task in tasks) {
 //   benchmark(tasks[task]);
