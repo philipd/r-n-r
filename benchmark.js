@@ -3,6 +3,7 @@ const benchmark = (callback) => {
   const a = callback();
   console.timeEnd(callback.name);
   console.log("Returns: ", a);
+  return a;
 };
 
 const doXTimes = (callback, x) => {

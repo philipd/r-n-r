@@ -27,9 +27,33 @@ const tasks = {
   },
 };
 
-for(let task in tasks) {
-  benchmark(tasks[task]);
+const randInt = () => {
+  return chance.integer({ min: 0, max: 999999999999 });
+};
+
+const populateList = () => {
+  let myList = new LinkedList(chance.name());
+
+  doXTimes(() => { myList.prepend(chance.name()) }, Math.pow(10, 6))();
+  return myList;
 }
+
+const lotsOfListInsertions = (myList) => {
+  const insertionPoint = myList.itemAtPosition(10000);
+  for(let i=0; i<Math.pow(10,6); i++){
+    myList.insert(insertionPoint, chance.name());
+  }
+}
+
+const lotsOfArrayInsertions = () => {
+}
+
+const testList = benchmark(populateList);
+benchmark(() => testList.find(4565123));
+benchmark(() => testList.find(testList.valueAtPosition(10000)));
+benchmark(() => lotsOfListInsertions(testList));
+
+
 
 // benchmark(doXTimes(myList.append(chance.integer({ min: 0, max: 99 }), 1)));
 

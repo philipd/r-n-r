@@ -48,13 +48,30 @@ class LinkedList {
     return current;
   }
 
-  insertAt = (position, value) => {
+  find(value) {
+    let current = this.head;
+    while(current.next){
+      if(current.value === value) {
+        return current;
+      }
+      current = current.next;
+    }
+  }
+
+  insert(predecessor, valueToInsert){
+    const successor = predecessor.next;
+    predecessor.next = new LinkedListItem(valueToInsert);
+    predecessor.next.next = successor;
+  }
+
+  insertAt(position, value) {
     // We need to change the reference stored at the PREVIOUS point in the list
     let predecessor = this.itemAtPosition(position - 1);
     predecessor.next = new LinkedListItem(value, predecessor.next);
+    return predecessor.next;
   };
 
-  printAll = () => {
+  printAll() {
     let current = this.head;
     while (current) {
       console.log(current.value);
