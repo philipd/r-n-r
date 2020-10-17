@@ -1,0 +1,7 @@
+- [Linked Lists - Computerphile](https://www.youtube.com/watch?v=_jQhALI4ujg)
+- [EXTRA BITS - Linked Lists and Arrays - Computerphile](https://www.youtube.com/watch?v=jiHuPbUGlBE)
+- [How are JavaScript arrays represented in physical memory?](https://stackoverflow.com/questions/20321047/how-are-javascript-arrays-represented-in-physical-memory)
+- [Arrays vs Linked Lists - Computerphile](https://www.youtube.com/watch?v=DyG9S9nAlUM)
+- [JavaScript Array Performance Oddities (qooxdoo)](https://news.qooxdoo.org/javascript-array-performance-oddities-characteristics-d8139757b238)
+- [Array - Javascript (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+- [How do JavScript arrays work under the hood? (Ryan Peden)](https://ryanpeden.com/how-do-javascript-arrays-work-under-the-hood/)
