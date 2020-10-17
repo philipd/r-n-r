@@ -8,7 +8,7 @@ class linkedList {
   }
 
   append(value) {
-    this.head = new linkedListItem(value, this.head);
+    this.lastItem().next = new linkedListItem(value);
   }
 
   lastItem() {
@@ -78,4 +78,6 @@ console.log(myList.valueAtPosition(1));
 console.log(myList.itemAtPosition(0));
 console.log('========');
 myList.printAll();
-console.log(myList.lastItem());
+console.log('========');
+myList.append(99);
+myList.printAll();
