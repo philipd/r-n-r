@@ -1,6 +1,3 @@
-const Chance = require("chance");
-const { doXTimes, benchmark } = require("./benchmark");
-
 class LinkedList {
   constructor(value) {
     this.head = new LinkedListItem(value);
@@ -88,29 +85,3 @@ class LinkedListItem {
 }
 
 module.exports = LinkedList;
-
-// for(let task in tasks) {
-//   benchmark(tasks[task]);
-// }
-
-// benchmark(doXTimes(myList.append(chance.integer({ min: 0, max: 99 }), 1)));
-
-// const myList = new linkedList(13);
-
-// myList.printAll();
-// console.log('========');
-// myList.prepend(2);
-// myList.prepend(38);
-// myList.prepend(27);
-// myList.prepend(91);
-// myList.printAll();
-// console.log(myList.valueAtPosition(1));
-// console.log(myList.itemAtPosition(0));
-// console.log('========');
-// myList.printAll();
-// console.log('========');
-// myList.append(99);
-// myList.printAll();
-// console.log('========');
-// myList.insertAt(3, 77);
-// myList.printAll();
