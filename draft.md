@@ -60,7 +60,21 @@ But what if we need more room? "No problem! Just make the array bigger! So if ou
 Unfortunately, it's not that simple, because those places in memory are probably already being used by something else. So we need to create *a completely new array* and copy everything from the smaller one to the bigger one. Oof.
 
 ## Arrays vs. Linked Lists
+By this point, you might be squarely on Team Linked List. But linked lists have problems of their own. If you haven't thought of any yourself yet, I encourage you to give it some thought before continuing.
 
+Perhaps the most obvious disadvantage to linked lists is that we can only step through them in one direction, because each element contains a reference only to the next element, not the previous one. We can actually solve this problem by creating a *doubly-linked list*, which, as its name implies, is a list where each element contains a reference to both the following *and* preceding elements. This does, however, significantly increase the memory footprint of the data, as we have to store twice as many references.
+
+Unfortunately, linked lists have another set of disadvantages that can't be solved by implementing a doubly-linked list; they still require us to step through the list item-by-item to answer simple questions like, "how long is the list?" or "which value is stored at the 100th position?" As our list grows larger and larger, these questions become more and more time consuming to calculate: they are O(n). Arrays, by contrast, can answer these questions in a fixed *O(1)* time no matter the size of the array. If your array is stored in memory locations 3021 through 5042, for example, you can calculate the length by subtracting: 5042 - 3021. And you can get the value at any position by similarily trivial arithmetic: the item at position 150 would be at 3021 + 150.
+
+## Arrays and Linked Lists in JavaScript
+
+So, linked lists and arrays both have their respective advantages and disadvantages. But do these differences matter in languages like JavaScript, where data types are determined dynamically and memory allocation is managed automatically? How does JavaScript even create arrays, if we don't have to specify their size when we declare them?
+
+The answer may depend greatly on which particular JavaScript engine you're using. About 20 years ago, Mozilla's engine implemented "arrays" with plain objects. Modern engines like V8 achieve higher performance by inferring what kind of array you need and actually creating in memory. So, if you initialize an array that happens to contain nothing but integers, V8 will create an integer array. But if you add a floating-point number to the same array, V8 will make a new array to support the wider range of data types that you're storing. V8 also hides the fact that arrays in memory have a fixed size by creating new arrays behind the scenes whenever your data gets too big to fit.
+
+If we implement linked lists in Javascript, we won't get these kind of performance enhancements. So is it even worth it to try?
+
+The answer, surprisingly, may be "yes."
 
 ## Linked Lists
 Address in Memory | Value
