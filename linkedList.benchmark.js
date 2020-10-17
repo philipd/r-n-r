@@ -39,19 +39,34 @@ const populateList = () => {
 }
 
 const lotsOfListInsertions = (myList) => {
-  const insertionPoint = myList.itemAtPosition(10000);
-  for(let i=0; i<Math.pow(10,6); i++){
+  const insertionPoint = myList.itemAtPosition(Math.pow(10,5));
+  for(let i=0; i<Math.pow(10,3); i++){
     myList.insert(insertionPoint, chance.name());
   }
 }
 
-const lotsOfArrayInsertions = () => {
+const populateArray = () => {
+  let myArray = [];
+
+  doXTimes(() => { myArray.push(chance.name()) }, Math.pow(10, 6))();
+  return myArray;
+}
+
+const lotsOfArrayInsertions = (myArray) => {
+  doXTimes(() => {
+    myArray.splice(Math.pow(10, 5), 0, chance.name());
+  }, Math.pow(10,3)
+  )();
 }
 
 const testList = benchmark(populateList);
-benchmark(() => testList.find(4565123));
-benchmark(() => testList.find(testList.valueAtPosition(10000)));
-benchmark(() => lotsOfListInsertions(testList));
+benchmark(() => testList.find(4565123), 'failed find');
+benchmark(() => testList.find(testList.valueAtPosition(10000)), 'successful find');
+benchmark(() => lotsOfListInsertions(testList), 'lots of list insertions');
+const testArray = benchmark(populateArray);
+console.log('length', testArray.length);
+benchmark(() => lotsOfArrayInsertions(testArray), 'lots of array insertions');
+console.log('length', testArray.length);
 
 
 

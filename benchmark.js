@@ -1,7 +1,8 @@
-const benchmark = (callback) => {
-  console.time(callback.name);
+const benchmark = (callback, title) => {
+  title = title || callback.name;
+  console.time(title);
   const a = callback();
-  console.timeEnd(callback.name);
+  console.timeEnd(title);
   console.log("Returns: ", a);
   return a;
 };
