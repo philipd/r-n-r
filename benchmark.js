@@ -43,7 +43,9 @@ const tasks = {
   },
 };
 
-for (let task in tasks) {
-  const bigTask = doXTimes(tasks[task], Math.pow(10, 8))
-  benchmark(bigTask);
-}
+// for (let task in tasks) {
+//   const bigTask = doXTimes(tasks[task], Math.pow(10, 8))
+//   benchmark(bigTask);
+// }
+
+module.export = { doXTimes, benchmark }

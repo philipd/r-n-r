@@ -1,3 +1,5 @@
+const { doXTimes, benchmark } = require('./benchmark');
+
 class linkedList {
   constructor(value) {
     this.head = new linkedListItem(value);
