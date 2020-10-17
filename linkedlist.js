@@ -59,13 +59,6 @@ class linkedListItem {
 
 const myList = new linkedList(13);
 
-// let current = head;
-// let sum = 0;
-// while(current != null) {
-//   sum += current.value;
-//   current = current.next;
-// }
-
 myList.printAll();
 console.log('========');
 myList.prepend(2);
