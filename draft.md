@@ -74,9 +74,7 @@ The answer may depend greatly on which particular JavaScript engine you're using
 
 If we implement linked lists in Javascript, we won't get these kind of performance enhancements. So is it even worth it to try?
 
-The answer, surprisingly, may be "yes."
-
-I created a [JavaScript class](https://github.com/philipd/linked-list) to implement a singly-linked list data structure, then ran it through various performance tests to compare it to JavaScript's built-in arrays. With an array containing a million randomly-generated strings, making a thousand additional insertions into the middle of the array took roughly 3 seconds. Performing the same number of insertions into a linked list of the same length took roughly 7 *milliseconds*.
+I decided to find out myself. I created a [JavaScript class](https://github.com/philipd/linked-list) to implement a singly-linked list data structure, then ran it through various performance tests to compare it to JavaScript's built-in arrays. With an array containing a million randomly-generated strings, making a thousand additional insertions into the middle of the array took roughly 3 seconds. Performing the same number of insertions into a linked list of the same length took roughly 7 *milliseconds*.
 
 It's worth clarifying, however, that insertion into a linked list can be O(1) or O(n) depending on what information you begin with. If you have already have a reference to the location in memory where you want to insert your new element, insertion is O(1); just change a couple of reference pointers and you're done! But if you only know the *ordinal position* where you want to perform your insertion, insertion is O(n) because you need to step through the list to find the appropriate location in memory.
 
