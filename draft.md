@@ -87,3 +87,15 @@ The fact that insertion into an array and insertion into a linked list by ordina
 ## Conclusions
 
 Arrays and linked lists both have their own strengths and weaknesses. A linked list performs better when the collection may grow to an unpredictable size, and can be incredibly efficient at data insertion. Practically speaking, however, programmers using modern scripting languages such as JavaScript are, in my personal opinion, unlikely to see significant performance enhancements from linked lists due to modern JavaScript engines' significant array method optimizations.
+
+## Sources Consulted
+
+- [Linked Lists (Computerphile)](https://www.youtube.com/watch?v=_jQhALI4ujg)
+- [EXTRA BITS - Linked Lists and Arrays (Computerphile)](https://www.youtube.com/watch?v=jiHuPbUGlBE)
+- [How are JavaScript arrays represented in physical memory? (Stack Overflow)](https://stackoverflow.com/questions/20321047/how-are-javascript-arrays-represented-in-physical-memory)
+- [Arrays vs Linked Lists (Computerphile)](https://www.youtube.com/watch?v=DyG9S9nAlUM)
+- [JavaScript Array Performance Oddities (qooxdoo)](https://news.qooxdoo.org/javascript-array-performance-oddities-characteristics-d8139757b238)
+- [Array - Javascript (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+- [How do JavScript arrays work under the hood? (Ryan Peden)](https://ryanpeden.com/how-do-javascript-arrays-work-under-the-hood/)
+- [Array data structure (Wikipedia)](https://en.wikipedia.org/wiki/Array_data_structure)
+- [Linked lists (Wikipedia)](https://en.wikipedia.org/wiki/Linked_list
