@@ -76,18 +76,14 @@ If we implement linked lists in Javascript, we won't get these kind of performan
 
 The answer, surprisingly, may be "yes."
 
-## Linked Lists
-Address in Memory | Value
---- | ---
-1003 | 'Hae Lim', 0000
-... | ...
-2533 | 'Francoise', 5239
-... | ...
-5239 | 'Rohit', 1003
+I created a [JavaScript class](https://github.com/philipd/linked-list) to implement a singly-linked list data structure, then ran it through various performance tests to compare it to JavaScript's built-in arrays. With an array containing a million randomly-generated strings, making a thousand additional insertions into the middle of the array took roughly 3 seconds. Performing the same number of insertions into a linked list of the same length took roughly 7 *milliseconds*.
 
-## Array
-Address in Memory | Value
---- | --- 
-3423 | 'Francoise'
-3524 | 'Rohit'
-3625 | 'Hae Lim'
+It's worth clarifying, however, that insertion into a linked list can be O(1) or O(n) depending on what information you begin with. If you have already have a reference to the location in memory where you want to insert your new element, insertion is O(1); just change a couple of reference pointers and you're done! But if you only know the *ordinal position* where you want to perform your insertion, insertion is O(n) because you need to step through the list to find the appropriate location in memory.
+
+So what about this more difficult scenario, where we know we want to insert to the nth place in the list, but have to step through the list to get the appropriate reference location? Performance in this scenario will vary greatly depending on how far down the list we need to step before performing the insertion, but we can get a good idea of the average by inserting as close to the precise middle of the list as possible. In my tests, the results showed that a thousand of these step-through insertions took about 4.6 seconds, several orders of magnitude longer than insertion-by-reference, but comparable to the array insertion.
+
+The fact that insertion into an array and insertion into a linked list by ordinal position have comparable execution times shouldn't be surprising when we consider their time complexity: they are both O(n), even if the contents of the array need to be copied and re-written piecewise to a new location in memory. In both cases, we are stepping through the data one-by-one. While insertion into a full array comes with the additional overhead of not only *reading* the data but also *writing* it to a new location in memory, this does not increase the task's time complexity, and furthermore, modern JavaScript engines' performance optimizations for arrays likely give them some serious muscle over custom data structures implemented as objects.
+
+## Conclusions
+
+Arrays and linked lists both have their own strengths and weaknesses. A linked list performs better when the collection may grow to an unpredictable size, and can be incredibly efficient at data insertion. Practically speaking, however, programmers using modern scripting languages such as JavaScript are, in my personal opinion, unlikely to see significant performance enhancements from linked lists due to modern JavaScript engines' significant array method optimizations.
