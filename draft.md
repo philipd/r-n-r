@@ -76,9 +76,11 @@ So, linked lists and arrays both have their respective advantages and disadvanta
 
 The answer may depend greatly on which particular JavaScript engine your code ends up running on. About 20 years ago, Mozilla's engine implemented "arrays" with plain objects. In contrast, modern engines like Chrome's V8 achieve higher performance by inferring what kind of array you need and actually creating one in memory. So if you initialize an array that happens to contain nothing but integers, V8 will create an integer array. But if you add a floating-point number to the same array, V8 will make a new array to support the wider range of data types that you're storing. V8 also hides the fact that arrays in memory have a fixed size by creating new arrays behind the scenes whenever your data gets too big to fit, and even pre-emptively avoids this extra effort by routinely creating larger arrays than you actually ask for.
 
-If we implement linked lists in Javascript, we won't get these kinds of performance enhancements. So is it even worth it to try?
+If we implement linked lists in Javascript, we won't get these kinds of performance enhancements. So is it even worth it to try? I decided to find out myself.
 
-I decided to find out myself. I created a [JavaScript class](https://github.com/philipd/linked-list) to implement a singly-linked list data structure, then ran it through various performance tests to compare it to JavaScript's built-in arrays. With an array containing a million randomly-generated strings, making a thousand additional insertions into the middle of the array took roughly 2 seconds. Performing the same number of insertions into a linked list of the same length took roughly 7 *milliseconds*.
+### Testing Data Insertion
+
+To test the performance of linked lists in JavaScript, I created a [JavaScript class](https://github.com/philipd/linked-list) to implement a singly-linked list data structure, then performed various tasks to compare it to JavaScript's built-in arrays. With an array containing a million randomly-generated strings, making a thousand additional insertions into the middle of the array took roughly 2 seconds. Performing the same number of insertions into a linked list of the same length took roughly 7 *milliseconds*. Wow!
 
 It's worth clarifying, however, that insertion into a linked list can be either time-consuming or practically instantaneous depending on what information you begin with. If you already have a reference to the location in memory where you want to insert your new element, insertion is a cinch, no matter the size of your list; just change a couple of reference pointers and you're done! But if you only know the *ordinal position* where you want to perform your insertion, then insertion can be time-consuming because you need to step through the list to find the appropriate location in memory. And the longer your list is, the longer it will take.
 
@@ -88,14 +90,16 @@ The fact that insertion into an array and insertion into a linked list by ordina
 
 So, back to arrays and linked lists! It turns out that insertion into an array and insertion into a linked list by ordinal position have the same time complexity; they are both linear, even though the contents of the array need to be copied and re-written piecewise to a new location in memory. In both cases, we are stepping through the data one-by-one, and the execution time grows in proportion to the quantity of data. While insertion into a full array comes with the additional overhead of not only *reading* the data but also *writing* it to a new location in memory, this does not increase the task's time complexity, and furthermore, modern JavaScript engines' performance optimizations for arrays likely give them some serious muscle over custom data structures implemented as objects.
 
-Let's look at appending and prepending next. There's an interesting pattern to the relative performance of arrays and lists in this task:
+### Appending and Prepending
+
+Let's look at appending and prepending next. There's an interesting pattern to the relative performance of arrays and lists in this regard:
 
 . | Array | List 
  --- | --- | ---
  Appending | 0.2 ms | 9256.2 ms
  Prepending | 2911.2 ms | 0.4 ms
 
-A list is apparently really bad at appending because the location of the last element can only be found by stepping through the entire list. An array, on the other hand, is really bad at *prepending* since all the data has to "scootch over" to make room.
+A list is evidently really bad at appending, because the location of the last element can only be found by stepping through the entire list. An array, on the other hand, is really bad at *prepending* since all the data has to "scootch over" to make room.
 
 But wait! The distinction between 'append' and 'prepend' in linked lists is largely arbitrary. If we're mostly interested adding data to the end of our list, there's no reason not to pretend our entire linked list is backwards and that the "first" element is actually the last one. What kind of pattern might we notice if we compare the data in this situation?
 
@@ -104,20 +108,20 @@ But wait! The distinction between 'append' and 'prepend' in linked lists is larg
  Appending | 0.2 ms | 0.4 ms
  Prepending | 2911.2 ms | 9256.2 ms
 
-This visualization lets us really see the power of V8's array optimizations. Appending large amounts of data to an array shouldn't be faster than appending to our backwards list, because we need to create a new array every time our array reaches capacity. But because V8 creates arrays with plenty of room to spare, that's not really a concern.
+This visualization lets us really see the power of V8's array optimizations. Because we need to create a new array every time our array reaches capacity, appending large amounts of data to an array shouldn't be faster than appending to our backwards list. But because V8 offers performance enhancements such as creating arrays with plenty of room to spare, repetitive re-initialization of arrays isn't much of a concern.
 
-Don't count linked lists out just yet, however. Recall that we can create a *doubly-linked* list, allowing us to traverse the list from either end. Such a data structure makes it just as easy to prepend as to append. I haven't implemented a doubly-linked list so I can't run the tests, but presumably the results would look something like this:
+Don't count linked lists out just yet, however. Recall that we can create a *doubly-linked* list, allowing us to traverse the list from either end. Such a data structure makes it just as easy to prepend as to append. I haven't implemented a doubly-linked list so I can't run the tests, but we can safely assume the results would look something like this:
 . | Array | Doubly-Linked List 
  --- | --- | ---
  Appending | 0.2 ms | 0.4 ms
  Prepending | 2911.2 ms | 0.4 ms
 
- *Now* we have a clear use case for linked lists in JavaScript. If we need to do lots of append and prepend operations, a linked list is the obvious choice.
+ *Here* is a clear use case for linked lists in JavaScript. If we need to do lots of append and prepend operations, a linked list is the obvious choice.
 
 
 ## Conclusions
 
-Arrays and linked lists both have their own strengths and weaknesses. A linked list performs better when the collection may grow to an unpredictable size, and can be incredibly efficient at data insertion. Practically speaking, however, programmers coding in JavaScript are, in my opinion, unlikely to see significant performance enhancements from linked lists due to modern scripting engines' powerful array optimizations, and the same may well be true of other languages that feature automatic memory management and loose or dynamic typing.
+Arrays and linked lists both have their own strengths and weaknesses. A linked list performs better when the collection may grow to an unpredictable size, and can be incredibly efficient at data insertion, appending, and prepending. It's important to remember, however, that high-level programming languages may offer performance optimizations for built-in data structures that aren't available to custom ones, so programmers should not assume that implementing a linked list will give them any practical performance advantage.
 
 ## Sources Consulted
 
