@@ -116,7 +116,7 @@ Don't count linked lists out just yet, however. Recall that we can create a *dou
  Appending | 0.2 ms | 0.4 ms
  Prepending | 2911.2 ms | 0.4 ms
 
- *Here* is a clear use case for linked lists in JavaScript. If we need to do lots of append and prepend operations, a linked list is the obvious choice.
+ *Here* is a clear use case for linked lists in JavaScript. If we need to do lots of append and prepend operations, a doubly-linked list is the obvious choice.
 
 
 ## Conclusions
